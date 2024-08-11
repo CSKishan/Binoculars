@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Binoculars",
+  "version": "1.0",
+  "description": "Select and search any text on Google without leaving the current tab",
+  "permissions": ["storage", "contextMenus", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/binocular_color_50.png",
+      "48": "assets/binocular_color_50.png",
+      "128": "assets/binocular_color_50.png"
+    },
+    "default_title": "Binoculars"
+  },
+  "icons": {
+    "16": "assets/binocular_color_50.png",
+    "48": "assets/binocular_color_50.png",
+    "128": "assets/binocular_color_50.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "trigger-list-popup": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "windows": "Ctrl+B",
+        "mac": "Command+Shift+B"
+      },
+      "description": "Show Binoculars list on Chrome"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*", "searchWindow.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
