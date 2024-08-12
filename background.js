@@ -41,7 +41,7 @@ function createContextMenuOptionForBinoculars() {
 
 // Listen for context menu item clicks
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  const searchedText = info.selectionText.trim();
+  const searchedText = info.selectionText.trim(); // Potential issue with selecting other option
   if (info.menuItemId === "searchWithBinoculars" && searchedText) {
     handleSelectedText(searchedText, tab);
   }

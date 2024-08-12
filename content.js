@@ -45,15 +45,15 @@
 
     // Send the selected text to the iframe
     iframe.onload = function () {
-      iframe.contentWindow.postMessage(
-        { text: selectedText, action: "showBinocularSearchPopup" },
-        "*"
-      );
+      chrome.runtime.sendMessage({
+        action: "loadBinocularSearchPopup",
+        text: selectedText,
+      });
     };
 
-    // // Remove the iframe after 3 seconds
-    // setTimeout(() => {
-    //   document.body.removeChild(iframe);
-    // }, 30000);
+    // Remove the iframe after 3 seconds
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 3000);
   }
 })();

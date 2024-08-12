@@ -1,6 +1,8 @@
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "showBinocularSearchPopup") {
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  if (request.action === "loadBinocularSearchPopup") {
+    console.info(request);
     const selectedTextDiv = document.getElementById("searchedBinocularText");
-    selectedTextDiv.innerText = request.text;
+    console.info(selectedTextDiv);
+    selectedTextDiv.innerHTML = request.text;
   }
 });
