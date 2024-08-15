@@ -9,13 +9,11 @@
   // Function to show a popup near the selected text
   function showPopupNearSelectedText(selectedText) {
     const selection = window.getSelection();
-    console.info(selection);
 
     if (!selection.rangeCount) return;
 
     const range = selection.getRangeAt(0);
-    console.info(range);
-    const rect = range.getBoundingClientRect();
+    const rect = range.getBoundingClientRect(); // The selected text bounding region
     console.info(rect);
 
     const iframe = document.createElement("iframe");
@@ -23,21 +21,31 @@
     iframe.style.position = "absolute";
     iframe.style.zIndex = "10000";
     iframe.style.border = "none";
-    iframe.style.width = "500px";
+    iframe.style.maxWidth = "500px";
 
-    const popupHeight = 100; // estimated height of the popup
-    const verticalOffset = 5;
+    const viewportWidth = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+    const viewportHeight = Math.max(
+      document.documentElement.clientHeight || 0,
+      window.innerHeight || 0
+    );
 
-    if (
-      rect.top + window.scrollY + rect.height + popupHeight + verticalOffset <
-      window.innerHeight
-    ) {
+    const popupHeight = 200; // estimated height of the popup
+    const verticalOffset = 10;
+
+    if (viewportHeight - popupHeight > rect.bottom) {
+      // place below
       iframe.style.top = `${rect.bottom + window.scrollY + verticalOffset}px`;
     } else {
-      iframe.style.top = `${
-        rect.top + window.scrollY - popupHeight - verticalOffset
+      iframe.style.bottom = `${
+        viewportHeight - window.scrollY - rect.top + verticalOffset
       }px`;
+      // place above
     }
+
+    console.info(iframe);
 
     iframe.style.left = `${rect.left + window.scrollX}px`;
 
@@ -54,6 +62,6 @@
     // Remove the iframe after 3 seconds
     setTimeout(() => {
       document.body.removeChild(iframe);
-    }, 3000);
+    }, 300000);
   }
 })();

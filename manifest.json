@@ -11,9 +11,9 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/binocular_color_50.png",
-      "48": "assets/binocular_color_50.png",
-      "128": "assets/binocular_color_50.png"
+      "16": "assets/binocular_color_100.png",
+      "48": "assets/binocular_color_100.png",
+      "128": "assets/binocular_color_100.png"
     },
     "default_title": "Binoculars"
   },
